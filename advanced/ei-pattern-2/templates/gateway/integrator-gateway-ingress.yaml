@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "fullname" . }}-integrator-gateway-tls-ingress
@@ -30,5 +30,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ template "fullname" . }}-integrator-gateway-service
-          servicePort: 8243
+          service:
+            name: {{ template "fullname" . }}-integrator-gateway-service
+            port:
+              number: 8243
