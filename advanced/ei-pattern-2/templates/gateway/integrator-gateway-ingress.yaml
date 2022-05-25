@@ -29,6 +29,7 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
           service:
             name: {{ template "fullname" . }}-integrator-gateway-service
