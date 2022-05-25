@@ -37,7 +37,7 @@ wso2:
       imageName: "wso2ei-integrator"
       imageTag: "6.6.0"
       # Number of deployment replicas
-      replicas: 1
+      replicas: 2
       # Minimum number of seconds for which a newly created pod should be ready without any of its containers crashing, for it to be considered available.
       minReadySeconds: 75
       strategy:
