@@ -135,8 +135,8 @@ spec:
               mountPath: /home/wso2carbon/wso2-config-volume/conf/axis2
             - name: integrator-conf-datasources
               mountPath: /home/wso2carbon/wso2-config-volume/conf/datasources
-            - name: integrator-car-files
-              mountPath: /home/wso2carbon/wso2ei-6.6.0/repository/deployment/server/carbonapps/
+#            - name: integrator-car-files
+#              mountPath: /home/wso2carbon/wso2ei-6.6.0/repository/deployment/server/carbonapps/
             - name: integrator-conf-entrypoint
               mountPath: /home/wso2carbon/entrypoint.sh
               subPath: docker-entrypoint.sh
@@ -210,9 +210,9 @@ spec:
           configMap:
             name: integrator-conf-entrypoint
             defaultMode: 0407
-        - name: integrator-car-files
-          persistentVolumeClaim:
-            claimName: wso2ei-car-shared          
+#        - name: integrator-car-files
+#          persistentVolumeClaim:
+#            claimName: wso2ei-car-shared          
       {{ if .Values.wso2.centralizedLogging.enabled }}
         - name: shared-logs
           emptyDir: {}
