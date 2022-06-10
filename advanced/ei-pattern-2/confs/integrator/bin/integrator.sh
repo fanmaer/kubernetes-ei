@@ -333,6 +333,7 @@ do
     -DavoidConfigUpdate=true \
     -Dproperties.file.path=default \
     -Djdk.tls.client.protocols=TLSv1.2 \
+	-Dnashorn.args=--no-deprecation-warning \
 {{- if .Values.wso2.monitoring.enabled }}
     -javaagent:/home/wso2carbon/prometheus/jmx_prometheus_javaagent-0.12.0.jar=2222:/home/wso2carbon/prometheus/config.yaml \
 {{- end }}
