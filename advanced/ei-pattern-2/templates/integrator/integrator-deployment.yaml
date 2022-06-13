@@ -38,6 +38,20 @@ spec:
         monitoring: {{ default "jmx" .Values.wso2.monitoring.prometheus.jmxJobName }}
     spec:
       initContainers:
+        - name: init-psql-connector-download
+          image: cropio/busybox-wget-https
+          command:
+            - /bin/sh
+            - '-c'
+            - >
+              set -e
+
+              wget --no-check-certificate
+              https://jdbc.postgresql.org/download/postgresql-42.2.19.jar -P
+              /psql-connector-jar/
+          volumeMounts:
+            - name: psql-connector-jar
+              mountPath: /psql-connector-jar 
         {{ if .Values.wso2.monitoring.enabled }}
         - name: init-jmx-exporter
           image: busybox:1.31
@@ -120,6 +134,8 @@ spec:
             - containerPort: 9443
               protocol: TCP
           volumeMounts:
+            - name: psql-connector-jar
+              mountPath: /home/wso2carbon/wso2-artifact-volume/lib          
             - name: integrator-bin
               mountPath: /home/wso2carbon/wso2-config-volume/bin
             {{ if .Values.wso2.monitoring.enabled }}
@@ -197,6 +213,8 @@ spec:
         - name: wso2ei-deployment-creds
       {{ end }}
       volumes:
+        - name: psql-connector-jar
+          emptyDir: {}      
         - name: integrator-conf
           configMap:
             name: integrator-conf
